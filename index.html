@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Dropdown Search</title>
+  </head>
+  <body>
+    <div class="search-bar">
+      <div class="dropdown">
+        <div id="drop-text" class="dropdown-text">
+          <span id="span">Everything</span>
+          <i id="icon" class="fa-solid fa-chevron-down"></i>
+        </div>
+        <ul id="list" class="dropdown-list">
+          <li class="dropdown-list-item">Everything</li>
+          <li class="dropdown-list-item">Software Development</li>
+          <li class="dropdown-list-item">Web Development</li>
+          <li class="dropdown-list-item">Data Analyst</li>
+          <li class="dropdown-list-item">IT Consultant</li>
+          <li class="dropdown-list-item">Network Administrator</li>
+        </ul>
+      </div>
+      <div class="search-box">
+        <input type="text" id="search-input" placeholder="Search anything..." />
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </div>
+    </div>
+    <script>
+let dropdownBtnText = document.getElementById("drop-text");
+let span = document.getElementById("span");
+let icon = document.getElementById("icon");
+let list = document.getElementById("list");
+let input = document.getElementById("search-input");
+let listItems = document.querySelectorAll(".dropdown-list-item");
+
+dropdownBtnText.onclick = function () {
+  list.classList.toggle("show");
+  icon.style.rotate = "-180deg";
+};
+
+window.onclick = function (e) {
+  if (
+    e.target.id !== "drop-text" &&
+    e.target.id !== "icon" &&
+    e.target.id !== "span"
+  ) {
+    list.classList.remove("show");
+    icon.style.rotate = "0deg";
+  }
+};
+
+for (item of listItems) {
+  item.onclick = function (e) {
+    span.innerText = e.target.innerText;
+    if (e.target.innerText == "Everything") {
+      input.placeholder = "Search Anything...";
+    } else {
+      input.placeholder = "Search in " + e.target.innerText + "...";
+    }
+  };
+}
+</script>
+  </body>
+</html>
